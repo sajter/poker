@@ -1,11 +1,11 @@
 # Poker
-A free, open-source RedM script for poker vorp.
+A free, open-source RedM script for VORP poker.
 
-I am not responsible for the script, it is not my property. The script i converted from RSG to VORP, and the appearance has also been modified. 
-Any changes will be updated; if you add something, share it with others. Every new addition will be updated until we reach the ideal free poker script.
+I am not responsible for this script; it is not my property. I converted the script from RSG to VORP, and the appearance has also been modified.  
+Any changes will be updated; if you add something, please share it with others. Every new addition will be incorporated until we achieve the ideal free poker script.
 
+Please make the language changes yourself, as I did them for my own use.
 
-Please make the language change yourself, as I did it for my own.
 
 ## Dependencies
 -  Ox_lib
@@ -33,6 +33,6 @@ I could not figure out how to change the faces on the cards that the players hol
 
 
 ## Special Thenks
-Thanks Created to: [ShameyWinehouse](https://github.com/ShameyWinehouse)
+Thanks to the Creator : [ShameyWinehouse](https://github.com/ShameyWinehouse)
 
-Thanks Mod to: [Nubetastic](https://github.com/Nubetastic)
+Thanks to the Modder: [Nubetastic](https://github.com/Nubetastic)
