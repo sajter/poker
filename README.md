@@ -12,7 +12,7 @@ Please make the language change yourself, as I did it for my own.
 -  Vorp
 
 ## Features
--"Texas Hold 'Em" style poker
+"Texas Hold 'Em" style poker
 - Support for all possible win scenarios, with an advanced tie-breaker
 - Configurable (tables, chairs, buttons, audio, animations)
 - Added Features
@@ -27,8 +27,8 @@ Please make the language change yourself, as I did it for my own.
         
 
 ## Special Notes
--NPC's were used to speed up testing and I might write up working npc code later once script is working for players.
--I could not figure out how to change the faces on the cards that the players hold.
+NPC's were used to speed up testing and I might write up working npc code later once script is working for players.
+I could not figure out how to change the faces on the cards that the players hold.
 
 
 
