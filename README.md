@@ -3,6 +3,9 @@ A free, open-source RedM script for poker vorp.
 I am not responsible for the script; it is not my property. The script has been converted from RSG to VORP, and the appearance has also been modified. 
 If anyone has the time and knowledge, please feel free to share with others. Every new addition will be updated until we reach the ideal free poker script.
 
+
+Please make the language change yourself, as I did it for my own.
+
 Dependencies
     Ox_lib
     Vorp
@@ -19,6 +22,8 @@ Features
         Auto next hand after 10 seconds, with shifting who goes first.
         Players can join while game is in progress
         Verifies player funds and takes appropriate actions
+
+        
 
 Special Notes
     NPC's were used to speed up testing and I might write up working npc code later once script is working for players.
