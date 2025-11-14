@@ -1,8 +1,8 @@
 # Poker
 A free, open-source RedM script for poker vorp.
 
-I am not responsible for the script, it is not my property. The script has been converted from RSG to VORP, and the appearance has also been modified. 
-If anyone has the time and knowledge, please feel free to share with others. Every new addition will be updated until we reach the ideal free poker script.
+I am not responsible for the script, it is not my property. The script i converted from RSG to VORP, and the appearance has also been modified. 
+Any changes will be updated; if you add something, share it with others. Every new addition will be updated until we reach the ideal free poker script.
 
 
 Please make the language change yourself, as I did it for my own.
