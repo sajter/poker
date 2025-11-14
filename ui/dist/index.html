@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Poker</title>
+    <link rel="stylesheet" href="./assets/index.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Play:wght@400;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="./assets/vendor.js"></script>
+    <script type="module" src="./assets/index.js"></script>
+    
+    <style>
+      /* Style dla wersji "High-Stakes Poker" */
+      
+      #blinds-modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        /* Ciemne tło, aby okno było centrum uwagi */
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Play', 'Roboto', sans-serif;
+      }
+
+      #blinds-modal {
+        width: 450px;
+        max-width: 95vw;
+        /* Głęboka, ciemna zieleń (jak filc stołu pokerowego) z gradientem */
+        background: linear-gradient(145deg, #1f402f, #142a1e); 
+        border: 3px solid #6b4d00; /* Gruby, złoty obramowanie */
+        border-radius: 12px;
+        /* Duży, rozmyty cień dla efektu uniesienia */
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9), 0 0 15px rgba(255, 215, 0, 0.4); 
+        color: #f0f0f0;
+        transform: scale(0.95);
+        opacity: 0;
+        /* Animacja pojawiania się */
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+      /* Aktywacja animacji */
+      #blinds-modal-overlay.active #blinds-modal {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      #blinds-modal h3 {
+        margin: 0;
+        padding: 18px 25px;
+        font-size: 26px;
+        font-weight: 700;
+        /* Wyśrodkowanie nagłówka */
+        text-align: center; 
+        /* Bardziej intensywny, ciepły złoty */
+        color: #ffd700; 
+        border-bottom: 2px solid #3c3c3c;
+        /* Subtelny cień i blask nagłówka */
+        text-shadow: 0 0 8px rgba(255, 215, 0, 0.6); 
+        letter-spacing: 0.5px;
+      }
+
+      #blinds-modal .content {
+        padding: 25px;
+      }
+
+      #blinds-modal .actions {
+        display: flex;
+        gap: 15px;
+        /* Wyśrodkowanie przycisków */
+        justify-content: center; 
+        padding: 0 25px 20px;
+      }
+
+      /* Etykieta inputu */
+      .info-label {
+        display: block;
+        margin-bottom: 8px;
+        color: #d0d0d0;
+        font-size: 14px;
+        font-weight: 400;
+      }
+
+      #blinds-input {
+        width: 100%;
+        padding: 14px 18px; 
+        border-radius: 8px;
+        border: 1px solid #5a7d6d; 
+        background: #0d1e15; 
+        color: #ffffff;
+        font-size: 20px;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.6);
+      }
+      #blinds-input:focus {
+        border-color: #ffd700; 
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2), inset 0 2px 5px rgba(0, 0, 0, 0.6);
+      }
+
+      .info-text {
+        margin-top: 20px;
+        color: #b0d3bf; 
+        font-size: 15px;
+        line-height: 1.6;
+        border-top: 1px dashed #305040;
+        padding-top: 15px;
+      }
+      .info-text strong {
+        color: #ffffff;
+        font-weight: 700;
+        text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Stylizacja przycisków */
+      #blinds-cancel,
+      #blinds-confirm {
+        padding: 12px 25px;
+        border-radius: 6px;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+        min-width: 140px; /* Ułatwia równe wyśrodkowanie */
+      }
+
+      /* Przycisk Anuluj */
+      #blinds-cancel {
+        background: linear-gradient(180deg, #5c5c5c, #333333);
+        color: #f0f0f0;
+        border: 1px solid #666;
+      }
+      #blinds-cancel:hover {
+        background: linear-gradient(180deg, #6c6c6c, #444444);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Przycisk Potwierdź */
+      #blinds-confirm {
+        background: linear-gradient(180deg, #ffd700, #a08000); 
+        color: #1e1e1e;
+        border: 1px solid #ffd700;
+        text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+        box-shadow: 0 4px 12px rgba(255, 215, 0, 0.6);
+      }
+      #blinds-confirm:hover {
+        background: linear-gradient(180deg, #ffe033, #b39300);
+        box-shadow: 0 6px 16px rgba(255, 215, 0, 0.8);
+      }
+      #blinds-confirm:active {
+        transform: translateY(1px);
+        box-shadow: 0 3px 8px rgba(255, 215, 0, 0.6);
+      }
+    </style>
+    
+    <div id="blinds-modal-overlay">
+      <div id="blinds-modal" role="dialog" aria-modal="true" aria-labelledby="blinds-title">
+        <h3 id="blinds-title">♠️ Ustaw Stawkę ♣️</h3>
+        <div class="content">
+          <label for="blinds-input" class="info-label">Wysokość Stawki </label>
+          <input id="blinds-input" type="number" min="1" max="1000" step="1" value="5" />
+          
+          <div class="info-text">
+            <div id="blinds-inc">Wysokość Podbicia: <strong>+$5</strong></div>
+            <div id="blinds-max">Maksymalna Stawka: <strong>$25</strong></div>
+          </div>
+        </div>
+        <div class="actions">
+		<button id="blinds-confirm" type="button">Dołącz</button>
+         <button id="blinds-cancel" type="button">Wyjdź</button>
+        </div>
+      </div>
+    </div>
+    
+    <script>
+      (function(){
+        const overlay = document.getElementById('blinds-modal-overlay');
+        const modal = document.getElementById('blinds-modal');
+        const input = document.getElementById('blinds-input');
+        const btnOk = document.getElementById('blinds-confirm');
+        const btnCancel = document.getElementById('blinds-cancel');
+        const incEl = document.getElementById('blinds-inc');
+        const maxEl = document.getElementById('blinds-max');
+        let min=1, max=1000;
+        
+        function formatCurrency(value) {
+            // Funkcja do formatowania waluty
+            return '$' + Math.floor(value).toLocaleString();
+        }
+
+        function render(){
+          const v = Number(input.value)||min;
+          // Aktualizacja tekstu z formatowaniem waluty (przetłumaczone)
+          incEl.innerHTML = 'Wysokość Podbicia: <strong>+' + formatCurrency(v) + '</strong>';
+          maxEl.innerHTML = 'Maksymalna Stawka: <strong>' + formatCurrency(v*5) + '</strong>';
+        }
+        
+        function show(opts){
+          min = Number(opts && opts.min || 1);
+          max = Number(opts && opts.max || 1000);
+          const def = Number(opts && opts.defaultBlind || min);
+          input.min = String(min);
+          input.max = String(max);
+          input.value = String(def);
+          render();
+          overlay.style.display = 'flex';
+          setTimeout(() => {
+            overlay.classList.add('active');
+            input.focus();
+          }, 10);
+        }
+        
+        function hide(){ 
+          overlay.classList.remove('active');
+          setTimeout(() => {
+            overlay.style.display = 'none'; 
+          }, 300);
+        }
+        
+        window.addEventListener('message', function(ev){
+          const d = ev && ev.data || {};
+          if(d.type === 'openBlindsModal') show(d);
+        });
+        
+        function post(name, body){
+          try{ fetch(`https://${GetParentResourceName()}/${name}`, {method:'POST', body: JSON.stringify(body||{})}); }catch(e){}
+        }
+        
+        input.addEventListener('input', render);
+        
+        btnOk.addEventListener('click', function(){
+          let v = Number(input.value);
+          if(!isFinite(v)) return;
+          if(v < min) v = min;
+          if(v > max) v = max;
+          hide();
+          post('blindsSelected', { blind: Math.floor(v) });
+        });
+        
+        btnCancel.addEventListener('click', function(){ hide(); post('cancelBlinds'); });
+        
+        // Zgodnie z Twoją prośbą, brak zamykania po kliknięciu poza oknem.
+        
+        document.addEventListener('keydown', function(e){
+          if(overlay.style.display === 'flex'){
+            if(e.key==='Enter'){ e.preventDefault(); btnOk.click(); }
+            if(e.key==='Escape'){ e.preventDefault(); btnCancel.click(); }
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
