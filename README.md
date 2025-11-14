@@ -1,7 +1,7 @@
 # Poker
 A free, open-source RedM script for VORP poker.
 
-I am not responsible for this script; it is not my property. I converted the script from RSG to VORP, and the appearance has also been modified.  
+I converted the script from RSG to VORP, and the appearance has also been modified.  
 Any changes will be updated; if you add something, please share it with others. Every new addition will be incorporated until we achieve the ideal free poker script.
 
 Please make the language changes yourself, as I did them for my own use.
@@ -24,7 +24,7 @@ Please make the language changes yourself, as I did them for my own use.
 - Players can join while game is in progress
 - Verifies player funds and takes appropriate actions
 
-        
+I am not responsible for this script; it is not my property.        
 
 ## Special Notes
 NPC's were used to speed up testing and I might write up working npc code later once script is working for players.
